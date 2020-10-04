@@ -3,7 +3,7 @@ function sysCall_init()
     arm=sim.getObjectHandle('Arm_actuator')
     crab=sim.getObjectHandle('Crab_actuator')
     hoist=sim.getObjectHandle('Hoist_actuator')
-    suction=sim.getScriptHandle('suctionPad')
+    suction=sim.getObjectHandle('suctionPad')
 
     xml = [[
 <ui title="Speed Control" closeable="true" resizable="false" activate="false">
@@ -43,12 +43,12 @@ function actuateHoist(ui,id,newVal)
 end
 
 function actuateMagnet(ui)
-    local state = sim.getScriptSimulationParameter(suction,'active')
+    local state = sim.getUserParameter(suction,'active')
     if state then
-        sim.setScriptSimulationParameter(suction,'active','false')
+        sim.setUserParameter(suction,'active','false')
         simUI.setButtonText(ui,8,"deactivated")
     else
-        sim.setScriptSimulationParameter(suction,'active','true')
+        sim.setUserParameter(suction,'active','true')
         simUI.setButtonText(ui,8,"activated")
     end
 end
